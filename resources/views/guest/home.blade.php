@@ -1,0 +1,17 @@
+@extends('guest.layouts.master')
+
+@section('content')
+    @include('guest.home-components.loading')
+    @include('guest.home-components.cookie')
+    @include('guest.home-components.permission')
+    @include('guest.home-components.control')
+    @include('guest.home-components.background')
+    @include('guest.home-components.header')
+    @include('guest.home-components.mobile')
+    @include('guest.home-components.hero')
+    @include('guest.home-components.about')
+    @include('guest.home-components.features')
+    @include('guest.home-components.works')
+    @include('guest.home-components.pricing')
+    @include('guest.home-components.footer')
+@endsection
