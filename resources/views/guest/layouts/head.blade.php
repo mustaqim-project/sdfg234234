@@ -9,15 +9,18 @@
 
     <!-- Title & Description -->
     <title>Miluv - Kenali Dulu, Jadian Kemudian | Aplikasi Jodoh Serius Berbasis AI</title>
-    <meta name="description" content="Miluv bantu kamu menemukan pasangan yang benar-benar cocok lewat tes kepribadian & teknologi AI. Serius cari jodoh? Kenali dulu, jadian kemudian." />
-    <meta name="keywords" content="aplikasi jodoh, cari pasangan serius, jodoh online, tes kepribadian, ai matchmaking, jodoh masa depan, pasangan hidup, miluv app" />
+    <meta name="description"
+        content="Miluv bantu kamu menemukan pasangan yang benar-benar cocok lewat tes kepribadian & teknologi AI. Serius cari jodoh? Kenali dulu, jadian kemudian." />
+    <meta name="keywords"
+        content="aplikasi jodoh, cari pasangan serius, jodoh online, tes kepribadian, ai matchmaking, jodoh masa depan, pasangan hidup, miluv app" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.miluv.app/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Miluv - Kenali Dulu, Jadian Kemudian" />
-    <meta property="og:description" content="Aplikasi jodoh berbasis AI yang bantu kamu ketemu pasangan yang benar-benar cocok. Bukan buat main-main. Serius? Mulai dari kenalan dulu." />
+    <meta property="og:description"
+        content="Aplikasi jodoh berbasis AI yang bantu kamu ketemu pasangan yang benar-benar cocok. Bukan buat main-main. Serius? Mulai dari kenalan dulu." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.miluv.app/" />
     <meta property="og:image" content="https://www.miluv.app/images/miluv-social-preview.jpg" />
@@ -27,21 +30,29 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Miluv - Kenali Dulu, Jadian Kemudian" />
-    <meta name="twitter:description" content="Cari pasangan serius yang cocok lewat kepribadian & AI. Miluv bantu kamu mulai dari kenal, lalu jadian. Hubungan yang tumbuh dari kecocokan." />
+    <meta name="twitter:description"
+        content="Cari pasangan serius yang cocok lewat kepribadian & AI. Miluv bantu kamu mulai dari kenal, lalu jadian. Hubungan yang tumbuh dari kecocokan." />
     <meta name="twitter:image" content="https://www.miluv.app/images/miluv-twitter-card.jpg" />
 
-
+    <!-- Preload Font Awesome CSS -->
+    <link rel="preload" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
+    </noscript>
     <!-- Icons -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Fonts & Icons -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" as="style" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" as="style" />
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap"
+        as="style" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
 
     <!-- Schema JSON-LD -->
     <script type="application/ld+json">

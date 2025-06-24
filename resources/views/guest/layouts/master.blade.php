@@ -457,6 +457,29 @@
             }
         }
 
+        // == Modal Management Functions (Global) ==
+        window.openModal = function(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add("show");
+                document.body.style.overflow = "hidden";
+            }
+        };
+
+        window.closeModal = function(modalId) {
+            let modal;
+            if (typeof modalId === 'string') {
+                modal = document.getElementById(modalId);
+            } else {
+                modal = modalId; // Already a modal element
+            }
+
+            if (modal) {
+                modal.classList.remove("show");
+                document.body.style.overflow = "";
+            }
+        };
+
         // == Main Application ==
         document.addEventListener("DOMContentLoaded", () => {
             // --- Constants and Variables ---
@@ -507,13 +530,16 @@
             updateThemeIcon(savedTheme);
 
             function updateThemeIcon(theme) {
+                if (!themeToggle) return;
                 const icon = themeToggle.querySelector('i');
-                if (theme === 'dark') {
-                    icon.className = 'fas fa-sun';
-                    themeToggle.setAttribute('aria-label', 'Switch to light mode');
-                } else {
-                    icon.className = 'fas fa-moon';
-                    themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+                if (icon) {
+                    if (theme === 'dark') {
+                        icon.className = 'fas fa-sun';
+                        themeToggle.setAttribute('aria-label', 'Switch to light mode');
+                    } else {
+                        icon.className = 'fas fa-moon';
+                        themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+                    }
                 }
             }
 
@@ -536,13 +562,16 @@
             let isFullscreen = false;
 
             function updateFullscreenIcon() {
+                if (!fullscreenBtn) return;
                 const icon = fullscreenBtn.querySelector('i');
-                if (isFullscreen) {
-                    icon.className = 'fas fa-compress';
-                    fullscreenBtn.setAttribute('aria-label', 'Exit fullscreen');
-                } else {
-                    icon.className = 'fas fa-expand';
-                    fullscreenBtn.setAttribute('aria-label', 'Enter fullscreen');
+                if (icon) {
+                    if (isFullscreen) {
+                        icon.className = 'fas fa-compress';
+                        fullscreenBtn.setAttribute('aria-label', 'Exit fullscreen');
+                    } else {
+                        icon.className = 'fas fa-expand';
+                        fullscreenBtn.setAttribute('aria-label', 'Enter fullscreen');
+                    }
                 }
             }
 
@@ -667,21 +696,6 @@
             handleScroll();
 
             // --- Modal Functionality ---
-            function openModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.add("show");
-                    document.body.style.overflow = "hidden";
-                }
-            }
-
-            function closeModal(modal) {
-                if (modal) {
-                    modal.classList.remove("show");
-                    document.body.style.overflow = "";
-                }
-            }
-
             modalTriggers.forEach(trigger => {
                 trigger.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -761,9 +775,9 @@
                 if (type === "warning") iconClass = "fas fa-exclamation-triangle";
 
                 toast.innerHTML = `
-                    <i class="toast-icon ${iconClass}"></i>
-                    <span>${message}</span>
-                `;
+            <i class="toast-icon ${iconClass}"></i>
+            <span>${message}</span>
+        `;
 
                 toastContainer.appendChild(toast);
 
@@ -815,7 +829,7 @@
                     const targetElement = document.querySelector(targetId);
 
                     if (targetElement) {
-                        const headerHeight = header.offsetHeight;
+                        const headerHeight = header ? header.offsetHeight : 0;
                         const targetPosition = targetElement.offsetTop - headerHeight;
 
                         window.scrollTo({
@@ -852,9 +866,12 @@
                 const controlButtons = document.querySelector('.control-buttons');
                 const cookieBanner = document.getElementById('cookieBanner');
 
+                if (!controlButtons) return;
+
                 if (window.innerWidth <= 575.98) {
                     // Move control buttons to avoid mobile nav collision
-                    if (document.querySelector('.mobile-bottom-nav').style.display !== 'none') {
+                    const mobileNav = document.querySelector('.mobile-bottom-nav');
+                    if (mobileNav && mobileNav.style.display !== 'none') {
                         controlButtons.style.bottom = '80px';
                     }
 
@@ -875,22 +892,22 @@
 
             function requestTick() {
                 if (!ticking) {
-                    requestAnimationFrame(handleScroll);
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
                     ticking = true;
                 }
             }
 
-            window.addEventListener('scroll', () => {
-                requestTick();
-                ticking = false;
-            });
+            window.addEventListener('scroll', requestTick);
 
             // --- App Functions ---
             window.startReadinessTest = function() {
                 // Check if user has granted necessary permissions
                 if (permissionManager.permissions.camera !== 'granted') {
                     showToast('Akses kamera diperlukan untuk verifikasi identitas.', 'warning');
-                    permissionStatus.classList.add('show');
+                    if (permissionStatus) permissionStatus.classList.add('show');
                     return;
                 }
 
@@ -902,7 +919,7 @@
                 // Check if user has granted location permission
                 if (permissionManager.permissions.location !== 'granted') {
                     showToast('Akses lokasi diperlukan untuk pencarian pasangan terdekat.', 'warning');
-                    permissionStatus.classList.add('show');
+                    if (permissionStatus) permissionStatus.classList.add('show');
                     return;
                 }
 
@@ -910,8 +927,12 @@
                 // Implement partner search logic
             };
 
-            window.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('googleLoginForm').addEventListener('submit', function(event) {
+            // --- Google Form Event Handlers ---
+            const googleLoginForm = document.getElementById('googleLoginForm');
+            const googleRegisterForm = document.getElementById('googleRegisterForm');
+
+            if (googleLoginForm) {
+                googleLoginForm.addEventListener('submit', function(event) {
                     event.preventDefault();
 
                     showToast('Menghubungkan dengan Google OAuth...', 'info');
@@ -928,8 +949,10 @@
                         this.submit(); // lanjutkan redirect ke /oauth/google
                     }, 1000);
                 });
+            }
 
-                document.getElementById('googleRegisterForm').addEventListener('submit', function(event) {
+            if (googleRegisterForm) {
+                googleRegisterForm.addEventListener('submit', function(event) {
                     event.preventDefault();
 
                     showToast('Mendaftar dengan Google OAuth...', 'info');
@@ -940,20 +963,11 @@
                     });
 
                     setTimeout(() => {
-                        showToast('Registrasi berhasil! Selamat bergabung di Miluv.',
-                            'success');
+                        showToast('Registrasi berhasil! Selamat bergabung di Miluv.', 'success');
                         closeModal('registerModal');
                         this.submit(); // lanjutkan redirect ke /oauth/google
                     }, 1000);
                 });
-            });
-
-            function closeModal(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.remove('show');
-                    document.body.style.overflow = "";
-                }
             }
 
             // Success message on load
